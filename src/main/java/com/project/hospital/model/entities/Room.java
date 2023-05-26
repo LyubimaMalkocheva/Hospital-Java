@@ -1,6 +1,6 @@
-package com.project.hospital.room;
+package com.project.hospital.model.entities;
 
-import com.project.hospital.patient.Patient;
+import com.project.hospital.TypeRoom;
 import jakarta.persistence.*;
 
 import java.util.Set;

@@ -1,10 +1,10 @@
-package com.project.hospital.patient;
+package com.project.hospital.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.project.hospital.doctor.Doctor;
-import com.project.hospital.room.Room;
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 @Entity
 public class Patient {
     @Id
@@ -21,23 +21,18 @@ public class Patient {
     private Doctor doctor;
 
     @ManyToOne
+    @JoinColumn(name = "nurse")
+    @JsonIgnoreProperties({"phone","healthInfo", "curing", "room", "numberNights", "payment", "money"})
+    private Nurse nurse ;
+
+    @ManyToOne
     @JoinColumn(name = "room_id")
     private Room room;
     private Integer numberNights;
     private boolean payment;
-    private Double money;
+    private Double obligationsToPay;
 
-    public Patient() {
-    }
 
-    public Patient(String name, String phone, String healthInfo, String curing, Doctor doctor, boolean payment) {
-        this.name = name;
-        this.phone = phone;
-        this.healthInfo = healthInfo;
-        this.curing = curing;
-        this.doctor = doctor;
-        this.payment = payment;
-    }
 
     public String getName() {
         return name;
@@ -103,11 +98,11 @@ public class Patient {
         this.payment = payment;
     }
 
-    public Double getMoney() {
-        return money;
+    public Double getObligationsToPay() {
+        return obligationsToPay;
     }
 
-    public void setMoney(Double money) {
-        this.money = money;
+    public void setObligationsToPay(Double obligationsToPay) {
+        this.obligationsToPay = obligationsToPay;
     }
 }
