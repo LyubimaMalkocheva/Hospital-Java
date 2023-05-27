@@ -1,19 +1,22 @@
 package com.project.hospital.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.project.hospital.Curing;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @Entity
+@NoArgsConstructor
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private String name;
     private String phone;
-    private String healthInfo;
-    private String curing;
+    private String healthInfo; // set by doctor
+    private Curing curing; // set by doctor
 
     @ManyToOne
     @JoinColumn(name = "doctor")
@@ -23,15 +26,13 @@ public class Patient {
     @ManyToOne
     @JoinColumn(name = "nurse")
     @JsonIgnoreProperties({"phone","healthInfo", "curing", "room", "numberNights", "payment", "money"})
-    private Nurse nurse ;
+    private Nurse nurse;
 
     @ManyToOne
     @JoinColumn(name = "room_id")
     private Room room;
     private Integer numberNights;
-    private boolean payment;
     private Double obligationsToPay;
-
 
 
     public String getName() {
@@ -58,11 +59,15 @@ public class Patient {
         this.healthInfo = healthInfo;
     }
 
-    public String getCuring() {
+    public Curing getCuring() {
         return curing;
     }
 
-    public void setCuring(String curing) {
+    public Nurse getNurse() {
+        return nurse;
+    }
+
+    public void setCuring(Curing curing) {
         this.curing = curing;
     }
 
@@ -70,32 +75,12 @@ public class Patient {
         return doctor;
     }
 
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
     public Room getRoom() {
         return room;
     }
 
-    public void setRoom(Room room) {
-        this.room = room;
-    }
-
     public Integer getNumberNights() {
         return numberNights;
-    }
-
-    public void setNumberNights(Integer numberNights) {
-        this.numberNights = numberNights;
-    }
-
-    public boolean isPayment() {
-        return payment;
-    }
-
-    public void setPayment(boolean payment) {
-        this.payment = payment;
     }
 
     public Double getObligationsToPay() {
@@ -104,5 +89,22 @@ public class Patient {
 
     public void setObligationsToPay(Double obligationsToPay) {
         this.obligationsToPay = obligationsToPay;
+    }
+
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
+    }
+
+    public void calculateObligationsToPay(){
+        this.obligationsToPay = this.obligationsToPay + this.curing.getDays() * this.room.getTypeRoom().getRoomPrice();
+    }
+
+    public void payObligations(){
+        Hospital.calculateIncome(obligationsToPay);
+        obligationsToPay = 0.;
     }
 }

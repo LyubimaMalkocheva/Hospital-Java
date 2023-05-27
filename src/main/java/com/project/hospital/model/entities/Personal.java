@@ -8,9 +8,13 @@ public abstract class Personal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column
     @NotBlank(message = "Name should not be blank")
     private String name = null;
+
+    protected Personal() {
+    }
 
     public Personal(String name) {
         this.name = name;
@@ -32,5 +36,6 @@ public abstract class Personal {
         this.name = name;
     }
 
-//TODO salary
+
+    //TODO find annnotation for not including abstract class in the database
 }

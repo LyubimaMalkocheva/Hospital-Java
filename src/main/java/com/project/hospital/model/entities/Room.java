@@ -14,25 +14,22 @@ public class Room {
     private Integer availableBeds;
     private TypeRoom typeRoom;
 
+    @ManyToOne
+    @JoinColumn(name = "department")
+    private Department department;
+
     public Room() {
     }
 
-    public Room(Long id, Set<Patient> patients, Integer availableBeds, TypeRoom typeRoom) {
-        Id = id;
+    public Room(Set<Patient> patients, Integer availableBeds, TypeRoom typeRoom, Department department) {
         this.patients = patients;
         this.availableBeds = availableBeds;
         this.typeRoom = typeRoom;
+        this.department = department;
     }
 
-    public Room(Integer availableBeds, TypeRoom typeRoom) {
-        this.availableBeds = availableBeds;
-        this.typeRoom = typeRoom;
-    }
-
-    public Room(Set<Patient> patients, Integer availableBeds, TypeRoom typeRoom) {
-        this.patients = patients;
-        this.availableBeds = availableBeds;
-        this.typeRoom = typeRoom;
+    public Department getDepartment() {
+        return department;
     }
 
     public Long getId() {
@@ -66,4 +63,7 @@ public class Room {
     public void setTypeRoom(TypeRoom typeRoom) {
         this.typeRoom = typeRoom;
     }
+
+    //TODO add patient to room (check how many beds are available?)
+    //TODO remove patient from room (Beds +1 and check which numberRoom the patient leave)
 }

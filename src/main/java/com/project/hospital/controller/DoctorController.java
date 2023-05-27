@@ -1,11 +1,10 @@
 package com.project.hospital.controller;
 
+import com.project.hospital.Qualification;
 import com.project.hospital.model.entities.Doctor;
 import com.project.hospital.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,9 +20,26 @@ public class DoctorController {
         return doctorService.getAllDoctors();
     }
 
+    @GetMapping("/findDoctorById/{id}")
+    public Doctor getDoctorById(@PathVariable Long id) {
+        return doctorService.getDoctorById(id);
+    }
     //POST
+    @PostMapping
+    public Doctor registerNewDoctor(@RequestBody Doctor doctor)
+    {
+         return doctorService.registerNewDoctor(doctor);
+    }
 
     //PUT
+    @PutMapping("/update/{id}")
+    public Doctor updateDoctor(@PathVariable Qualification qualification, @RequestBody Doctor doctor)
+    {
+        doctor.setQualification(qualification);
+        return doctorService.updateDoctor(doctor);
 
+    }
     //DELETE
+    @DeleteMapping("/deleteDoctorById/{id}")
+    public void deleteDoctorById(@PathVariable Long id){doctorService.deleteDoctorById(id);}
 }
