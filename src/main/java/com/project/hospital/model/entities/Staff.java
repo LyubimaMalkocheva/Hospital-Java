@@ -16,12 +16,12 @@ public class Staff extends Personal {
     @JoinColumn(name = "hospital")
     private Hospital hospital;
 
-    public Staff(String name) {
-        super(name);
+    public Staff(String name, String phone, String email, String password) {
+        super(name, phone, email, password);
     }
 
-    public Staff(String name, Hospital hospital) {
-        super(name);
+    public Staff(String name, String phone, String email, String password, Hospital hospital) {
+        super(name, phone, email, password);
         this.hospital = hospital;
     }
 }

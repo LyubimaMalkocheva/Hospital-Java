@@ -20,12 +20,12 @@ public class Patient {
 
     @ManyToOne
     @JoinColumn(name = "doctor")
-    @JsonIgnoreProperties({"phone","healthInfo", "curing", "room", "numberNights", "payment", "money"})
+    @JsonIgnoreProperties({"phone", "healthInfo", "curing", "room", "numberNights", "obligationsToPay"})
     private Doctor doctor;
 
     @ManyToOne
     @JoinColumn(name = "nurse")
-    @JsonIgnoreProperties({"phone","healthInfo", "curing", "room", "numberNights", "payment", "money"})
+    @JsonIgnoreProperties({"phone", "healthInfo", "curing", "room", "numberNights", "obligationsToPay"})
     private Nurse nurse;
 
     @ManyToOne
@@ -65,6 +65,10 @@ public class Patient {
 
     public Nurse getNurse() {
         return nurse;
+    }
+
+    public void setNurse(Nurse nurse) {
+        this.nurse = nurse;
     }
 
     public void setCuring(Curing curing) {
@@ -107,4 +111,5 @@ public class Patient {
         Hospital.calculateIncome(obligationsToPay);
         obligationsToPay = 0.;
     }
+
 }
