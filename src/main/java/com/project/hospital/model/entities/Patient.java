@@ -9,12 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @NoArgsConstructor
-public class Patient {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
-    private String name;
-    private String phone;
+public class Patient extends Personal{
+
     private String healthInfo; // set by doctor
     private Curing curing; // set by doctor
 
@@ -32,23 +28,12 @@ public class Patient {
     @JoinColumn(name = "room_id")
     private Room room;
     private Integer numberNights;
-    private Double obligationsToPay;
+    private Double obligationsToPay=0.0;
 
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public Patient(String name, String phone, String email, String password, Double obligationsToPay) {
+        super(name, phone, email, password);
+        this.obligationsToPay = obligationsToPay;
     }
 
     public String getHealthInfo() {
@@ -94,15 +79,7 @@ public class Patient {
     public void setObligationsToPay(Double obligationsToPay) {
         this.obligationsToPay = obligationsToPay;
     }
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
-    }
-
+    
     public void calculateObligationsToPay(){
         this.obligationsToPay = this.obligationsToPay + this.curing.getDays() * this.room.getTypeRoom().getRoomPrice();
     }

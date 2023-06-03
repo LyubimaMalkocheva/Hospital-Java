@@ -9,12 +9,7 @@ import java.util.Set;
 
 @Entity
 @NoArgsConstructor
-public class Doctor {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String name;
-
+public class Doctor extends Personal{
     @ManyToOne
     @JoinColumn(name = "department")
     private Department department;
@@ -25,20 +20,20 @@ public class Doctor {
     private Set<Patient> patients;
     private Qualification qualification;
 
-    public Doctor(String name, Department department, boolean isHeadOfDepartment, Qualification qualification) {
-        this.name = name;
+    public Doctor(String name, String phone, String email, String password, Department department, boolean isHeadOfDepartment, Qualification qualification) {
+        super(name, phone, email, password);
         this.department = department;
         this.isHeadOfDepartment = isHeadOfDepartment;
         this.qualification = qualification;
     }
-    public Doctor(String name, Department department, boolean isHeadOfDepartment) {
-        this.name = name;
+    public Doctor(String name, String phone, String email, String password, Department department, boolean isHeadOfDepartment) {
+        super(name, phone, email, password);
         this.department = department;
         this.isHeadOfDepartment = isHeadOfDepartment;
     }
 
-    public Doctor(String name, Department department) {
-        this.name = name;
+    public Doctor(String name, String phone, String email, String password, Department department) {
+        super(name, phone, email, password);
         this.department = department;
     }
 
@@ -58,13 +53,7 @@ public class Doctor {
         this.patients = patients;
     }
 
-    public int getId() { return id; }
-
-    public String getName() { return name;}
-
     public Department getDepartment() { return department;}
-
-    public void setName(String name) {this.name = name;}
 
     public void setDepartment(Department department) {this.department = department;}
 

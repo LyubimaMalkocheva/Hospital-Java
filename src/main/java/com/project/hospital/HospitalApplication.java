@@ -13,9 +13,10 @@ public class HospitalApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HospitalApplication.class, args);
 
-		//TODO add all types of Service
-		//TODO add all types of Controllers
-		//TODO add all types of Repository
+		//TODO add Services - Staff, Departament, Hospital
+		//TODO add  Controllers - Staff, Departament, Hospital
+		//TODO add  Repositories - Staff, Departament, Hospital
+
 		//TODO authentication
 
 		//TODO create Front-End
