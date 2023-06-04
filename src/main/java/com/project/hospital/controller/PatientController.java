@@ -1,10 +1,10 @@
 package com.project.hospital.controller;
 
-import com.project.hospital.Qualification;
-import com.project.hospital.model.entities.Doctor;
 import com.project.hospital.model.entities.Patient;
+import com.project.hospital.model.exceptions.NotFoundException;
 import com.project.hospital.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,10 +32,30 @@ public class PatientController {
 
     //PUT
     @PutMapping("/update/{id}")
-    public Patient updatePatient(@PathVariable Long id, @RequestBody Patient patient)
+    public ResponseEntity<String> updatePatient(@PathVariable Long id, @RequestBody Patient patient)
     {
-        patient.setId(id);
-        return patientService.updatePatient(patient);
+        Patient existingPatient = patientService.getPatientById(id);
+
+        if (existingPatient != null) {
+            if (patient.getName() != null)
+                existingPatient.setName(patient.getName());
+            if (patient.getPhone() != null)
+                existingPatient.setPhone(patient.getPhone());
+            if (patient.getEmail() != null)
+                existingPatient.setEmail(patient.getEmail());
+            if (patient.getPassword() != null)
+                existingPatient.setPassword(patient.getPassword());
+            if (patient.getHealthInfo() != null)
+                existingPatient.setHealthInfo(patient.getHealthInfo());
+            if (patient.getCuring() != null)
+                existingPatient.setCuring(patient.getCuring());
+
+            patientService.updatePatient(existingPatient);
+
+            return ResponseEntity.ok("Patient updated successfully");
+        } else {
+            throw new NotFoundException("Patient not found");
+        }
 
     }
     //DELETE

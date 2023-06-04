@@ -13,9 +13,7 @@ public class HospitalApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HospitalApplication.class, args);
 
-		//TODO add Services - Staff, Departament, Hospital
-		//TODO add  Controllers - Staff, Departament, Hospital
-		//TODO add  Repositories - Staff, Departament, Hospital
+		//TODO when deleting doctor do not delete patient - do this for all connected entities
 
 		//TODO authentication
 

@@ -72,6 +72,8 @@ public class Patient extends Personal{
         return numberNights;
     }
 
+    // TODO set number of night according to Enum Curing
+
     public Double getObligationsToPay() {
         return obligationsToPay;
     }
@@ -79,7 +81,7 @@ public class Patient extends Personal{
     public void setObligationsToPay(Double obligationsToPay) {
         this.obligationsToPay = obligationsToPay;
     }
-    
+
     public void calculateObligationsToPay(){
         this.obligationsToPay = this.obligationsToPay + this.curing.getDays() * this.room.getTypeRoom().getRoomPrice();
     }

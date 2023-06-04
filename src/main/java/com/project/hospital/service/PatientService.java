@@ -1,8 +1,7 @@
 package com.project.hospital.service;
 
-import com.project.hospital.model.entities.Doctor;
 import com.project.hospital.model.entities.Patient;
-import com.project.hospital.model.repositories.PatientRepository;
+import com.project.hospital.model.exceptions.repositories.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

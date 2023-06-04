@@ -1,4 +1,4 @@
-package com.project.hospital.model.repositories;
+package com.project.hospital.model.exceptions.repositories;
 
 import com.project.hospital.model.entities.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;

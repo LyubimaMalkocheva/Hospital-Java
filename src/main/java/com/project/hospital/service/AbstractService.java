@@ -1,8 +1,7 @@
 package com.project.hospital.service;
 
-import com.project.hospital.model.repositories.DoctorRepository;
-import com.project.hospital.model.repositories.NurseRepository;
-import com.project.hospital.model.repositories.RoomRepository;
+import com.project.hospital.HospitalApplication;
+import com.project.hospital.model.exceptions.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class AbstractService {
@@ -12,4 +11,10 @@ public class AbstractService {
     protected DoctorRepository doctorRepository;
     @Autowired
     protected NurseRepository nurseRepository;
+    @Autowired
+    protected StaffRepository staffRepository;
+    @Autowired
+    protected DepartmentRepository departmentRepository;
+    @Autowired
+    protected HospitalRepository hospitalRepository;
 }

@@ -1,10 +1,6 @@
 package com.project.hospital;
 
-import com.project.hospital.model.entities.Doctor;
-import com.project.hospital.model.repositories.DoctorRepository;
-import com.project.hospital.model.repositories.NurseRepository;
-import com.project.hospital.model.repositories.PatientRepository;
-import com.project.hospital.model.repositories.RoomRepository;
+import com.project.hospital.model.exceptions.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +9,8 @@ import org.springframework.context.annotation.Configuration;
 public class Config {
     @Bean
     CommandLineRunner commandLineRunner(DoctorRepository doctorRepository, NurseRepository nurseRepository,
-                                        PatientRepository patientRepository, RoomRepository roomRepository){
+                                        PatientRepository patientRepository, RoomRepository roomRepository,
+                                        StaffRepository staffRepository){
 
 
         return args -> {

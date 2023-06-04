@@ -1,6 +1,6 @@
 package com.project.hospital.service;
 
-import com.project.hospital.model.entities.Doctor;
+
 import com.project.hospital.model.entities.Room;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +20,6 @@ public class RoomService extends AbstractService{
 
     public Room addRoom(Room room) {
         return roomRepository.save(room);
-    }
-
-    public Doctor updateDoctor(Doctor doctor){
-        return  doctorRepository.save(doctor);
     }
 
     public Room updateRoom(Room room) {

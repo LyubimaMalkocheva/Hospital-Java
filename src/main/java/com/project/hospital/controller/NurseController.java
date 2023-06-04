@@ -1,7 +1,7 @@
 package com.project.hospital.controller;
 
-import com.project.hospital.Qualification;
 import com.project.hospital.model.entities.Nurse;
+import com.project.hospital.model.exceptions.NotFoundException;
 import com.project.hospital.service.NurseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,20 +38,24 @@ public class NurseController {
     public ResponseEntity<Nurse> updateNurse(@PathVariable Long id, @RequestBody Nurse updatedNurse) {
         Optional<Nurse> optionalNurse = Optional.ofNullable(nurseService.getNurseById(id));
         if (optionalNurse.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Nurse not found");
         }
-
         Nurse existingNurse = optionalNurse.get();
-        existingNurse.setName(updatedNurse.getName());
-        existingNurse.setPhone(updatedNurse.getPhone());
-        existingNurse.setEmail(updatedNurse.getEmail());
-        existingNurse.setPassword(updatedNurse.getPassword());
-        existingNurse.setDepartment(updatedNurse.getDepartment());
+        if (updatedNurse.getName() != null)
+            existingNurse.setName(updatedNurse.getName());
+        if (updatedNurse.getPhone() != null)
+            existingNurse.setPhone(updatedNurse.getPhone());
+        if (updatedNurse.getEmail() != null)
+            existingNurse.setEmail(updatedNurse.getEmail());
+        if (updatedNurse.getPassword() != null)
+            existingNurse.setPassword(updatedNurse.getPassword());
+        if (updatedNurse.getDepartment() != null)
+            existingNurse.setDepartment(updatedNurse.getDepartment());
         Nurse savedNurse = nurseService.updateNurse(existingNurse);
 
         return ResponseEntity.ok(savedNurse);
     }
     //DELETE
-    @DeleteMapping("/deleteDoctorById/{id}")
-    public void deleteDoctorById(@PathVariable Long id){nurseService.deleteNurseById(id);}
+    @DeleteMapping("/deleteNurseById/{id}")
+    public void deleteNurseById(@PathVariable Long id){nurseService.deleteNurseById(id);}
 }
