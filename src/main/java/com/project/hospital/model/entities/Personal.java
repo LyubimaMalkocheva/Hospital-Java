@@ -19,7 +19,7 @@ public abstract class Personal {
     private String name = null;
 
     @Column
-    @Pattern(regexp = "^08\\d{8}$", message = "Phone number must start with '08' and have 10 digits")
+    @Pattern(regexp = "^08\\d{8}$", message = "Phone number must start with '08' followed by 8 digits")
     private String phone;
 
     @Column
@@ -39,8 +39,7 @@ public abstract class Personal {
         this.password = password;
     }
 
-    public Personal(Long id, String name, String phone) {
-        this.id = id;
+    public Personal(String name, String phone) {
         this.name = name;
         this.phone = phone;
     }

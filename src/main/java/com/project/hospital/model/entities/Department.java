@@ -18,7 +18,7 @@ import java.util.Set;
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String name;
 
     @ManyToOne
@@ -26,7 +26,8 @@ public class Department {
     @JsonIgnoreProperties({"id","departments","staffSet"})
     private Hospital hospital;
 
-    @OneToOne(mappedBy = "department")
+    @OneToOne
+    @JoinColumn(name = "head_of_department")
     @JsonIgnoreProperties({"id","department","isHeadOfDepartment","patients","qualification"})
     private Doctor headOfDepartment;
 
@@ -50,5 +51,4 @@ public class Department {
         this.roomSet = new HashSet<>();
     }
 
-    //TODO check the error when getting a department
 }
