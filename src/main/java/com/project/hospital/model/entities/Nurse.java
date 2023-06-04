@@ -20,12 +20,13 @@ import java.util.Set;
 @AllArgsConstructor
 public class Nurse extends Personal {
 
-    @JsonIgnoreProperties({"nurse"})
     @OneToMany(mappedBy = "nurse")
+    @JsonIgnoreProperties({"id","healthInfo","curing","doctor","nurse","room","obligationsToPay","password","email","phone"})
     private Set<Patient> patients;
 
     @ManyToOne
     @JoinColumn(name = "department")
+    @JsonIgnoreProperties({"id","hospital","headOfDepartment","doctorSet","roomSet","nurseSet"})
     private Department department;
 
     public Nurse(String name, String phone, String email, String password, Department department) {

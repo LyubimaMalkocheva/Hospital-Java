@@ -1,5 +1,7 @@
 package com.project.hospital.controller;
 
+
+import com.project.hospital.model.entities.Doctor;
 import com.project.hospital.model.entities.Hospital;
 import com.project.hospital.model.exceptions.NotFoundException;
 import com.project.hospital.service.HospitalService;
@@ -14,6 +16,11 @@ import java.util.Optional;
 public class HospitalController {
     @Autowired
     private HospitalService hospitalService;
+
+    @GetMapping
+    public Hospital getHospital() {
+        return hospitalService.getHospital();
+    }
     //PUT
     @PutMapping("/update")
     public ResponseEntity<Hospital> updateHospital(@RequestBody Hospital updatedHospital)

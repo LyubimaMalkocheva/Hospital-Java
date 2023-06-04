@@ -1,5 +1,6 @@
 package com.project.hospital.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.project.hospital.TypeRoom;
 import com.project.hospital.model.exceptions.NotFoundPatientInRoom;
 import jakarta.persistence.*;
@@ -11,14 +12,18 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id; // number of room;
-    @OneToMany(mappedBy = "room")
-    private Set<Patient> patients;
+
     private Integer availableBeds;
     private TypeRoom typeRoom;
 
     @ManyToOne
     @JoinColumn(name = "department")
+    @JsonIgnoreProperties({"id","hospital","headOfDepartment","doctorSet","roomSet","nurseSet"})
     private Department department;
+
+    @OneToMany(mappedBy = "room")
+    @JsonIgnoreProperties({"id","healthInfo","curing","doctor","nurse","room","obligationsToPay","password","email","phone"})
+    private Set<Patient> patients;
 
     public Room() {
     }

@@ -1,5 +1,6 @@
 package com.project.hospital.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.project.hospital.Curing;
 import com.project.hospital.Qualification;
 import jakarta.persistence.*;
@@ -12,12 +13,14 @@ import java.util.Set;
 public class Doctor extends Personal{
     @ManyToOne
     @JoinColumn(name = "department")
+    @JsonIgnoreProperties({"id","hospital","headOfDepartment","doctorSet","roomSet","nurseSet"})
     private Department department;
 
     @Column(name = "is_head_of_department")
     private boolean isHeadOfDepartment = false;
 
     @OneToMany(mappedBy = "doctor")
+    @JsonIgnoreProperties({"id","healthInfo","curing","doctor","nurse","room","obligationsToPay","password","email","phone"})
     private Set<Patient> patients;
     private Qualification qualification;
 

@@ -1,5 +1,6 @@
 package com.project.hospital.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,9 +19,11 @@ public class Hospital {
     private String name;
     private String address;
 
+    @JsonIgnoreProperties({"id","hospital","doctorSet", "headOfDepartment","nurseSet","roomSet"})
     @OneToMany(mappedBy = "hospital")
     private Set<Department> departments;
 
+    @JsonIgnoreProperties({"id","hospital","password","email","phone"})
     @OneToMany(mappedBy = "hospital")
     private Set<Staff> staffSet;
 

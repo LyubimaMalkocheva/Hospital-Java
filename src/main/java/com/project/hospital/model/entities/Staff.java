@@ -16,8 +16,9 @@ public class Staff extends Personal {
     @JoinColumn(name = "hospital")
     private Hospital hospital;
 
-    public Staff(String name, String phone, String email, String password) {
+    public Staff(String name, String phone, String email, String password,Hospital hospital) {
         super(name, phone, email, password);
-        this.hospital = this.getHospital();
+        this.hospital=hospital;
+;
     }
 }

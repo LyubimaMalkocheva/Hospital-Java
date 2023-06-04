@@ -16,12 +16,12 @@ public class Patient extends Personal{
 
     @ManyToOne
     @JoinColumn(name = "doctor")
-    @JsonIgnoreProperties({"phone", "healthInfo", "curing", "room",  "obligationsToPay"})
+    @JsonIgnoreProperties({"id","department","password","email","phone","patients","qualification"})
     private Doctor doctor;
 
     @ManyToOne
     @JoinColumn(name = "nurse")
-    @JsonIgnoreProperties({"phone", "healthInfo", "curing", "room",  "obligationsToPay"})
+    @JsonIgnoreProperties({"id","patients","department","password","email","phone"})
     private Nurse nurse;
 
     @ManyToOne
