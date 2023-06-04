@@ -16,24 +16,22 @@ public class Patient extends Personal{
 
     @ManyToOne
     @JoinColumn(name = "doctor")
-    @JsonIgnoreProperties({"phone", "healthInfo", "curing", "room", "numberNights", "obligationsToPay"})
+    @JsonIgnoreProperties({"phone", "healthInfo", "curing", "room",  "obligationsToPay"})
     private Doctor doctor;
 
     @ManyToOne
     @JoinColumn(name = "nurse")
-    @JsonIgnoreProperties({"phone", "healthInfo", "curing", "room", "numberNights", "obligationsToPay"})
+    @JsonIgnoreProperties({"phone", "healthInfo", "curing", "room",  "obligationsToPay"})
     private Nurse nurse;
 
     @ManyToOne
     @JoinColumn(name = "room_id")
     private Room room;
-    private Integer numberNights;
     private Double obligationsToPay=0.0;
 
 
-    public Patient(String name, String phone, String email, String password, Double obligationsToPay) {
+    public Patient(String name, String phone, String email, String password) {
         super(name, phone, email, password);
-        this.obligationsToPay = obligationsToPay;
     }
 
     public String getHealthInfo() {
@@ -67,12 +65,6 @@ public class Patient extends Personal{
     public Room getRoom() {
         return room;
     }
-
-    public Integer getNumberNights() {
-        return numberNights;
-    }
-
-    // TODO set number of night according to Enum Curing
 
     public Double getObligationsToPay() {
         return obligationsToPay;

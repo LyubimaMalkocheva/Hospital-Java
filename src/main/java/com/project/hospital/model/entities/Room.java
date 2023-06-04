@@ -4,6 +4,7 @@ import com.project.hospital.TypeRoom;
 import com.project.hospital.model.exceptions.NotFoundPatientInRoom;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 @Entity
 public class Room {
@@ -20,6 +21,13 @@ public class Room {
     private Department department;
 
     public Room() {
+    }
+
+    public Room(Integer availableBeds, TypeRoom typeRoom, Department department) {
+        this.availableBeds = availableBeds;
+        this.typeRoom = typeRoom;
+        this.department = department;
+        this.patients = new HashSet<>();
     }
 
     public Room(Set<Patient> patients, Integer availableBeds, TypeRoom typeRoom, Department department) {

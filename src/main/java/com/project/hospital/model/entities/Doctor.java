@@ -14,6 +14,7 @@ public class Doctor extends Personal{
     @JoinColumn(name = "department")
     private Department department;
 
+    @Column(name = "is_head_of_department")
     private boolean isHeadOfDepartment = false;
 
     @OneToMany(mappedBy = "doctor")
@@ -36,7 +37,11 @@ public class Doctor extends Personal{
         super(name, phone, email, password);
         this.department = department;
     }
-
+    public Doctor(String name, String phone, String email, String password, Department department, Qualification qualification) {
+        super(name, phone, email, password);
+        this.department = department;
+        this.qualification = qualification;
+    }
     public boolean isHeadOfDepartment() {
         return isHeadOfDepartment;
     }

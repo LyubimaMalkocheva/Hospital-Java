@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -24,18 +25,23 @@ public class Department {
 
     private String name;
 
-    @OneToOne
-    @JoinColumn(name = "head_of_department_id")
+    @OneToOne(mappedBy = "department")
     private Doctor headOfDepartment;
 
     @OneToMany(mappedBy = "department")
-    private Set<Doctor> doctorList;
+    private Set<Doctor> doctorSet;
 
     @OneToMany(mappedBy = "department")
-    private Set<Nurse> nurses;
+    private Set<Nurse> nurseSet;
 
     @OneToMany(mappedBy = "department")
     private Set<Room> roomSet;
 
-
+    public Department(Hospital hospital, String name) {
+        this.hospital = hospital;
+        this.name = name;
+        this.doctorSet = new HashSet<>();
+        this.nurseSet = new HashSet<>();
+        this.roomSet = new HashSet<>();
+    }
 }

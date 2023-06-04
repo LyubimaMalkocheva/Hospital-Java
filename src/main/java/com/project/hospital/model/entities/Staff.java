@@ -18,10 +18,6 @@ public class Staff extends Personal {
 
     public Staff(String name, String phone, String email, String password) {
         super(name, phone, email, password);
-    }
-
-    public Staff(String name, String phone, String email, String password, Hospital hospital) {
-        super(name, phone, email, password);
-        this.hospital = hospital;
+        this.hospital = this.getHospital();
     }
 }
