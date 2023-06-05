@@ -6,27 +6,29 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @MappedSuperclass
 @Getter
 @Setter
 public abstract class Personal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    protected Long id;
 
     @Column
     @NotBlank(message = "Name should not be blank")
-    private String name = null;
+    protected String name = null;
 
     @Column
     @Pattern(regexp = "^08\\d{8}$", message = "Phone number must start with '08' followed by 8 digits")
-    private String phone;
+    protected String phone;
 
     @Column
-    private String email;
+    protected String email;
 
     @Column
-    private String password;
+    protected String password;
 
 
     protected Personal() {
@@ -60,4 +62,16 @@ public abstract class Personal {
         this.name = name;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Personal personal = (Personal) o;
+        return id.equals(personal.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

@@ -1,7 +1,7 @@
 package com.project.hospital.service;
 
-import com.project.hospital.HospitalApplication;
-import com.project.hospital.model.exceptions.repositories.*;
+import com.project.hospital.model.repositories.*;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class AbstractService {
@@ -17,4 +17,7 @@ public class AbstractService {
     protected DepartmentRepository departmentRepository;
     @Autowired
     protected HospitalRepository hospitalRepository;
+
+    @Autowired
+    protected ModelMapper mapper;
 }

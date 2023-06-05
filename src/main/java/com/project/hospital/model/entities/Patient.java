@@ -11,8 +11,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Patient extends Personal{
 
+    @Column(name = "health_info")
     private String healthInfo; // set by doctor
+
+    @Column(name = "curing")
     private Curing curing; // set by doctor
+
+    @Column(name = "unique_code")
+    private String uniqueCode;
+
+    @Column(name = "is_verified")
+    private boolean isVerified;
 
     @ManyToOne
     @JoinColumn(name = "doctor")
@@ -28,7 +37,6 @@ public class Patient extends Personal{
     @JoinColumn(name = "room_id")
     private Room room;
     private Double obligationsToPay=0.0;
-
 
     public Patient(String name, String phone, String email, String password) {
         super(name, phone, email, password);
@@ -72,6 +80,22 @@ public class Patient extends Personal{
 
     public void setObligationsToPay(Double obligationsToPay) {
         this.obligationsToPay = obligationsToPay;
+    }
+
+    public void setVerified(boolean verified) {
+        isVerified = verified;
+    }
+
+    public boolean isVerified() {
+        return isVerified;
+    }
+
+    public void setUniqueCode(String uniqueCode) {
+        this.uniqueCode = uniqueCode;
+    }
+
+    public String getUniqueCode() {
+        return uniqueCode;
     }
 
     public void calculateObligationsToPay(){

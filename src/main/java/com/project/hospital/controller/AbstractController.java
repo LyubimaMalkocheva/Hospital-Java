@@ -68,12 +68,13 @@ public abstract class AbstractController {
                 .build();
     }
 
-    protected int getLoggedUserId(HttpSession s){
+    protected int getLoggedPatientId(HttpSession s){
         if(s.getAttribute("LOGGED_ID") == null){
             throw new UnauthorizedException("You have to login!");
         }
         return (int) s.getAttribute("LOGGED_ID");
     }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ErrorDTO handleValidationExceptions(
             MethodArgumentNotValidException ex) {

@@ -1,4 +1,4 @@
-package com.project.hospital.model.exceptions.repositories;
+package com.project.hospital.model.repositories;
 
 
 import com.project.hospital.model.entities.Staff;
