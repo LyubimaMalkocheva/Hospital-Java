@@ -45,7 +45,10 @@ public class PatientService extends AbstractService {
         if(patientRepository.existsByEmail(dto.getEmail())){
             throw new BadRequestException("This email already  exists.");
         }
-        Patient patient = mapper.map(dto, Patient.class);
+        Patient patient = new Patient();
+        patient.setEmail(dto.getEmail());
+        patient.setPhone(dto.getPhoneNumber());
+        patient.setName(dto.getFirstName());
         patient.setPassword(encoder.encode(patient.getPassword()));
         String uniqueCode = UUID.randomUUID().toString();
         patient.setUniqueCode(uniqueCode);
@@ -54,7 +57,13 @@ public class PatientService extends AbstractService {
             sendEmailValidation(patient.getEmail(), uniqueCode);
         }).start();
 
-        return mapper.map(patient, PatientWithoutPassDTO.class);
+        PatientWithoutPassDTO patientWithoutPassDTO = new PatientWithoutPassDTO();
+        patientWithoutPassDTO.setName(patient.getName());
+        patientWithoutPassDTO.setId(patient.getId());
+        patientWithoutPassDTO.setPhone(patient.getPhone());
+        patientWithoutPassDTO.setEmail(patient.getEmail());
+
+        return patientWithoutPassDTO;
     }
 
     public PatientWithoutPassDTO deletePatientById(int id, int loggedPatientId) {
@@ -63,7 +72,13 @@ public class PatientService extends AbstractService {
         checkAuthorization(id, loggedPatientId);
         patientRepository.deleteById((long) id);
 
-        return mapper.map(patient, PatientWithoutPassDTO.class);
+        PatientWithoutPassDTO patientWithoutPassDTO = new PatientWithoutPassDTO();
+        patientWithoutPassDTO.setName(patient.getName());
+        patientWithoutPassDTO.setId(patient.getId());
+        patientWithoutPassDTO.setPhone(patient.getPhone());
+        patientWithoutPassDTO.setEmail(patient.getEmail());
+
+        return patientWithoutPassDTO;
     }
 
     @Transactional
@@ -75,7 +90,13 @@ public class PatientService extends AbstractService {
             throw new UnauthorizedException("The patient is not verified. Please check your email.");
         }
 
-        return mapper.map(patient, PatientWithoutPassDTO.class);
+        PatientWithoutPassDTO patientWithoutPassDTO = new PatientWithoutPassDTO();
+        patientWithoutPassDTO.setName(patient.getName());
+        patientWithoutPassDTO.setId(patient.getId());
+        patientWithoutPassDTO.setPhone(patient.getPhone());
+        patientWithoutPassDTO.setEmail(patient.getEmail());
+
+        return patientWithoutPassDTO;
     }
 
     public PatientWithoutPassDTO updatePatientById(int id, PatientEditDTO editDto, int loggedUserId) {
@@ -86,7 +107,13 @@ public class PatientService extends AbstractService {
         patient.setPhone(editDto.getPhoneNumber());
         patientRepository.save(patient);
 
-        return mapper.map(patient, PatientWithoutPassDTO.class);
+        PatientWithoutPassDTO patientWithoutPassDTO = new PatientWithoutPassDTO();
+        patientWithoutPassDTO.setName(patient.getName());
+        patientWithoutPassDTO.setId(patient.getId());
+        patientWithoutPassDTO.setPhone(patient.getPhone());
+        patientWithoutPassDTO.setEmail(patient.getEmail());
+
+        return patientWithoutPassDTO;
     }
 
     private void checkMatchingPasswords(String password, String confirmPassword) {
@@ -139,7 +166,13 @@ public class PatientService extends AbstractService {
         patient.setVerified(true);
         patientRepository.save(patient);
 
-        return mapper.map(patient, PatientWithoutPassDTO.class);
+        PatientWithoutPassDTO patientWithoutPassDTO = new PatientWithoutPassDTO();
+        patientWithoutPassDTO.setName(patient.getName());
+        patientWithoutPassDTO.setId(patient.getId());
+        patientWithoutPassDTO.setPhone(patient.getPhone());
+        patientWithoutPassDTO.setEmail(patient.getEmail());
+
+        return patientWithoutPassDTO;
     }
 
     public PatientWithoutPassDTO changePassword(int id, PatientPasswordChangeDTO passwordChangeDTO, int loggedPatientId) {
@@ -151,6 +184,12 @@ public class PatientService extends AbstractService {
         patient.setPassword(encoder.encode(passwordChangeDTO.getNewPassword()));
         patientRepository.save(patient);
 
-        return mapper.map(patient, PatientWithoutPassDTO.class);
+        PatientWithoutPassDTO patientWithoutPassDTO = new PatientWithoutPassDTO();
+        patientWithoutPassDTO.setName(patient.getName());
+        patientWithoutPassDTO.setId(patient.getId());
+        patientWithoutPassDTO.setPhone(patient.getPhone());
+        patientWithoutPassDTO.setEmail(patient.getEmail());
+
+        return patientWithoutPassDTO;
     }
 }

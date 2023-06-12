@@ -17,7 +17,4 @@ public class AbstractService {
     protected DepartmentRepository departmentRepository;
     @Autowired
     protected HospitalRepository hospitalRepository;
-
-    @Autowired
-    protected ModelMapper mapper;
 }
