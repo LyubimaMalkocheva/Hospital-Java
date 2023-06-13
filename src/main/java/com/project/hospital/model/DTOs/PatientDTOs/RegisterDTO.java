@@ -17,16 +17,16 @@ public class RegisterDTO {
     private String email;
 
     @NotNull(message = "Password cannot be null!")
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$", message = "Invalid password!")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{3,}$", message = "Invalid password!")
     private String password;
 
     @NotNull(message = "Confirm password cannot be null!")
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$", message = "Invalid confirm password!")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{3,}$", message = "Invalid confirm password!")
     private String confirmPassword;
 
 
     @NotBlank(message = "Name cannot be blank!")
-    @Size(max = 15, message = "Name cannot be longer than 15 characters")
+    @Size(max = 30, message = "Name cannot be longer than 30 characters")
     private String firstName;
 
     @NotBlank(message = "Phone number cannot be blank!")

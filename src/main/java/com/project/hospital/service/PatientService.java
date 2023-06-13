@@ -49,7 +49,7 @@ public class PatientService extends AbstractService {
         patient.setEmail(dto.getEmail());
         patient.setPhone(dto.getPhoneNumber());
         patient.setName(dto.getFirstName());
-        patient.setPassword(encoder.encode(patient.getPassword()));
+        patient.setPassword(encoder.encode(dto.getPassword()));
         String uniqueCode = UUID.randomUUID().toString();
         patient.setUniqueCode(uniqueCode);
         patientRepository.save(patient);
@@ -125,13 +125,13 @@ public class PatientService extends AbstractService {
     @SneakyThrows
     private void sendEmailValidation(String email, String code) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("finance.tracker.app2023@gmail.com");
+        message.setFrom("hospital.project.cscb@gmail.com");
         message.setTo(email);
         message.setSubject("Email Validation");
         message.setText("""
                 Hi,
                                 
-                Please click the following link to validate your email: http://localhost:7777/email-validation?code=""" + code + """
+                Please click the following link to validate your email: http://localhost:8081/email-validation?code=""" + code + """
                                 
                 Best regards,
                 Hospital team""");

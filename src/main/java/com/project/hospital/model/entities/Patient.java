@@ -4,11 +4,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.project.hospital.Curing;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @Entity
 @NoArgsConstructor
+@Setter
+@Getter
 public class Patient extends Personal{
 
     @Column(name = "health_info")
@@ -37,65 +43,10 @@ public class Patient extends Personal{
     @JoinColumn(name = "room_id")
     private Room room;
     private Double obligationsToPay=0.0;
+    private LocalDateTime expirationDate;
 
     public Patient(String name, String phone, String email, String password) {
         super(name, phone, email, password);
-    }
-
-    public String getHealthInfo() {
-        return healthInfo;
-    }
-
-    public void setHealthInfo(String healthInfo) {
-        this.healthInfo = healthInfo;
-    }
-
-    public Curing getCuring() {
-        return curing;
-    }
-
-    public Nurse getNurse() {
-        return nurse;
-    }
-
-    public void setNurse(Nurse nurse) {
-        this.nurse = nurse;
-    }
-
-    public void setCuring(Curing curing) {
-        this.curing = curing;
-    }
-
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public Room getRoom() {
-        return room;
-    }
-
-    public Double getObligationsToPay() {
-        return obligationsToPay;
-    }
-
-    public void setObligationsToPay(Double obligationsToPay) {
-        this.obligationsToPay = obligationsToPay;
-    }
-
-    public void setVerified(boolean verified) {
-        isVerified = verified;
-    }
-
-    public boolean isVerified() {
-        return isVerified;
-    }
-
-    public void setUniqueCode(String uniqueCode) {
-        this.uniqueCode = uniqueCode;
-    }
-
-    public String getUniqueCode() {
-        return uniqueCode;
     }
 
     public void calculateObligationsToPay(){
